@@ -1,10 +1,10 @@
 package com.example.myapplication.Api;
 
-public class    Rankings {
+public class Rankings {
     public String hero_id;
-    String score;
-    String  percent_rank;
-    String card;
+    public String score;
+    public String percent_rank;
+    public String card;
 
     public String getHero_id() {
         return hero_id;

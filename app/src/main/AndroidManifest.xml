@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".TotalActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PeersActivity"
+            android:exported="true" />
+        <activity
             android:name=".RankingsActivity"
             android:exported="true" />
         <activity

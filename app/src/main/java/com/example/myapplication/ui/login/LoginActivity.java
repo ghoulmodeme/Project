@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 .get(LoginViewModel.class);
 
         final EditText Id = findViewById(R.id.id);
-        Id.setText("1000754051");
+
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
 

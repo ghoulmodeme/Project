@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.Api.Api;
+import com.example.myapplication.Api.Rankings;
 
 import java.util.ArrayList;
 
@@ -20,90 +22,55 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RankingsActivity extends AppCompatActivity {
     private static final String BASE_URL = "https://api.opendota.com";
 Button back;
-TextView t1;
-TextView t2;
-TextView t3;
-TextView t4;
-TextView t5;
-TextView t6;
-TextView t7;
-TextView t8;
-TextView t9;
-TextView t10;
-TextView t11;
-TextView t12;
-TextView t13;
-TextView t14;
-TextView t15;
-TextView t16;
-TextView t17;
+TextView t1,t2,t3,t4,t5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rankings);
         String id;
         Intent intent = getIntent();
+        t1 = findViewById(R.id.textView);
+        t2=findViewById(R.id.textView2);
+        t3=findViewById(R.id.textView3);
+        t4=findViewById(R.id.textView4);
+        t5=findViewById(R.id.textView5);
+        back =findViewById(R.id.back1);
         id = intent.getStringExtra("ID");
-        System.out.println(id);
+
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api = retrofit.create(Api.class);
-        Call<ArrayList<com.example.myapplication.Api.Rankings>> call = api.getPlayerRankings(id);
-        call.enqueue(new Callback<ArrayList<com.example.myapplication.Api.Rankings>>() {
+        Call<ArrayList<Rankings>> call =api.getPlayerRankings(id);
+        call.enqueue(new Callback<ArrayList<Rankings>>() {
             @Override
-            public void onResponse(Call<ArrayList<com.example.myapplication.Api.Rankings>> call, Response<ArrayList<com.example.myapplication.Api.Rankings>> response) {
-                ArrayList<com.example.myapplication.Api.Rankings> rankings = response.body();
-                if(rankings.get(0).hero_id.equals("83")){
+            public void onResponse(Call<ArrayList<Rankings>> call, Response<ArrayList<Rankings>> response) {
+                ArrayList<Rankings > rankings =response.body();
+                t1.setText("Your score on hero with id "+" "+rankings.get(0).hero_id+"="+rankings.get(0).score);
+                t2.setText("Your score on hero with id "+" "+rankings.get(1).hero_id+"="+rankings.get(1).score);
+                t3.setText("Your score on hero with id "+" "+rankings.get(2).hero_id+"="+rankings.get(2).score);
+                t4.setText("Your score on hero with id "+" "+rankings.get(2).hero_id+"="+rankings.get(2).score);
+                t5.setText("Your score on hero with id "+" "+rankings.get(3).hero_id+"="+rankings.get(3).score);
 
-                }
-                if(rankings.get(1).hero_id.equals("83")){
-
-                }
-                if(rankings.get(2).hero_id.equals("83")){
-
-                }
-                if(rankings.get(3).hero_id.equals("83")){
-
-                }
-                if(rankings.get(4).hero_id.equals("83")){
-
-                }
-                if(rankings.get(5).hero_id.equals("83")){
-
-                }
-                if(rankings.get(6).hero_id.equals("83")){
-
-                }
-                if(rankings.get(7).hero_id.equals("83")){
-
-                }
-                if(rankings.get(8).hero_id.equals("83")){
-
-                }
-                if(rankings.get(9).hero_id.equals("83")){
-
-                }
-                if(rankings.get(10).hero_id.equals("83")){
-
-                }
-                if(rankings.get(11).hero_id.equals("83")){
-
-                }
-                if(rankings.get(12).hero_id.equals("83")){
-
-                }
-                if(rankings.get(13).hero_id.equals("83")){
-
-                }
-                if(rankings.get(14).hero_id.equals("83")){
 
             }
-}
-            @Override
-            public void onFailure(Call<ArrayList<com.example.myapplication.Api.Rankings>> call, Throwable t) {
 
+            @Override
+            public void onFailure(Call<ArrayList<Rankings>> call, Throwable t) {
+
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(RankingsActivity.this,ProfileActivity.class);
+                intent1.putExtra("ID",id);
+                startActivity(intent1);
             }
         });
     }

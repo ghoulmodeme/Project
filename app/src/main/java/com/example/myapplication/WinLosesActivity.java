@@ -65,6 +65,7 @@ public class WinLosesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(WinLosesActivity.this,ProfileActivity.class);
+                i.putExtra("ID", id);
                 startActivity(i);
             }
         });
